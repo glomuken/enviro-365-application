@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<style>
+    .registration-container {
+        border: 1px solid green;
+        border-radius: 10px;
+        padding: 10px;
+        width: 600px; /* Adjust the width according to your design */
+        margin: auto;
+        margin-top: 50px; /* Adjust the margin-top according to your design */
+    }
+
+    .registration-text {
+        display: block;
+        margin-bottom: 5px;
+        align: left;
+        margin: 0;
+    }
+
+    input {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: green;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-right: 186px;
+    }
+
+    button-container button {
+        background-color: green;
+        color: white;
+        font-weight: bold;
+        padding: 10px 70px;
+        margin-right: 100px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    span.user-info {
+        font-weight: normal; /* Remove bold from the user info */
+    }
+
+    span {
+        display: inline-block;
+        width: 200px;
+        text-align: left;
+        margin: 0;
+        font-weight: bold; /* Make the info labels bold */
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        // Submit the withdrawal form via AJAX
+        $("form").submit(function (event) {
+            event.preventDefault();
+            var form = $(this);
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (data) {
+                    // Display notification using JavaScript alert
+                    alert("Query Sent Successfully!");
+                    window.location.href = '/';
+                },
+                error: function () {
+                    alert("Error submitting query");
+                }
+            });
+        });
+    });
+</script>
+<div class="registration-container">
+    <h1>User Registration</h1>
+    <form action="#" th:action="@{/contact}" method="post">
+        <label class="registration-text">Full name:</label>
+        <input type="text" name="fullName" /><br/>
+
+        <label class="registration-text">E-mail:</label>
+        <input type="text" name="email" /><br/>
+
+        <br/>
+
+        <label class="registration-text">Query:</label>
+        <textarea rows="10" cols="74" name="query"></textarea>
+        <br/>
+        <div class="button-container">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Product View</title>
+  <style type="text/css">
+    body {
+        text-align: left;
+        margin-left: 20px;
+    }
+
+
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .button-container {
+            margin-top: 20px; /* Adjust the margin according to your design */
+            margin-left: 0px;
+        }
+
+        .button-container button {
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            padding: 10px 70px;
+            margin-right: 100px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+   header {
+            background-color: green;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        #companyName {
+            margin: 0;
+        }
+
+        #menuButton {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        #menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            top: 50px;
+            right: 10px;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #menu a {
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #menu a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+         footer {
+            background-color: green;
+            padding: 10px;
+            display: flex;
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 50px;
+        }
+
+  </style>
+  <script>
+    function toggleMenu() {
+        var menu = document.getElementById("menu");
+        menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+  </script>
+</head>
+<body>
+<header>
+  <div id="companyName" >Enviro 365 Psuedo Website</div>
+  <button id="menuButton" onclick="toggleMenu()">Menu</button>
+  <div id="menu">
+    <a href="/login">Logout</a>
+    <a th:href="@{/profile/{email}(email=${user.email})}">
+      Go to profile
+    </a>
+  </div>
+</header>
+<h2>Client's Products</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Type</th>
+    <th>Name</th>
+    <th>Current Balance</th>
+    <th>Action</th>
+    <th></th>
+  </tr>
+  <!-- Loop through each product and display its information -->
+  <tr th:each="product : ${user.products}">
+    <td th:text="${product.id}"></td>
+    <td th:text="${product.type}"></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.currentBalance}"></td>
+    <td>
+      <div class="button-container">
+        <a th:href="@{'/withdraw-history/' + ${product.id}}">
+          <button>View History</button>
+        </a>
+      </div>
+    </td>
+    <td>
+      <div class="button-container">
+        <a th:href="@{'/withdraw/' + ${product.id}}">
+          <button>Make Withdrwal</button>
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
+<footer></footer>
+</body>
+</html>

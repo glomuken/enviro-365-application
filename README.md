@@ -22,6 +22,7 @@ To run the Enviro365 Investments Automated Withdrawal Notice System locally, fol
 
 Clone the repository
 Navigate to the project directory
+Navigate into KamwanyaMukendi
 Run mvn clean install and mvn package
 Build and run the Spring Boot application: java -jar target/KamwanyaMukendi-0.0.1-SNAPSHOT.jar
 The application will be accessible at http://localhost:8080.

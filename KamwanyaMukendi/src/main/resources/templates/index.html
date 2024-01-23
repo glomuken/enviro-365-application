@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: green;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        #companyName {
+            margin: 0;
+        }
+
+        #menuButton {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        #menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            top: 50px;
+            right: 10px;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #menu a {
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #menu a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        section {
+            padding: 20px;
+        }
+        #p1{
+            margin : 1;
+        }
+
+        footer {
+            background-color: green;
+            padding: 10px;
+            display: flex;
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 50px;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <div id="companyName" >Enviro 365 Psuedo Website</div>
+    <button id="menuButton" onclick="toggleMenu()">Menu</button>
+    <div id="menu">
+        <a href="/login">Login</a>
+        <a href="/register">Sign-up as an Investor</a>
+        <a href="/contact">Contact an Agent</a>
+    </div>
+</header>
+
+<section>
+    <h3>About the Enviro 365</h3>
+    <p>Enviro365 IT Solutions was established by four South African software development experts with over 44 years collective experience.
+        The company was established in 2019 with the focus of creating bespoke software solutions in order to create operational efficiencies that will result in companies improving their profitability and overall operations of their respective businesses.
+        Our mandate is to drastically improve the success and sustainability of companies by solving day to day business problems through Information Technology.
+        We are proud to be a 100% black owned level 1 BBBEE company</p>
+    <br>
+    <hr>
+    <p>+27 12 141 3183</p>
+    <p>info@enviro365.co.za</p>
+    <p>First Floor, Block E, Corporate 66 Office Park, 269 Von Willich Ave, Centurion, 0157</p>
+
+
+</section>
+
+<footer></footer>
+
+</body>
+</html>

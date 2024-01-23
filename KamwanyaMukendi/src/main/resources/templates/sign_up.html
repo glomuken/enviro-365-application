@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Registration</title>
+    <style>
+        .registration-container {
+            border: 1px solid green;
+            border-radius: 10px;
+            padding: 10px;
+            width: 300px; /* Adjust the width according to your design */
+            margin: auto;
+            margin-top: 50px; /* Adjust the margin-top according to your design */
+        }
+
+        .registration-text {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="registration-container" align="center">
+    <h1>User Registration</h1>
+    <form action="#" th:action="@{/register}" method="post" th:object="${userRegistrationDto}">
+        <label class="registration-text">Full Name:</label>
+        <input type="text" th:field="*{name}" /><br/>
+
+        <label class="registration-text">E-mail:</label>
+        <input type="text" th:field="*{email}" /><br/>
+
+        <label class="registration-text">Address:</label>
+        <input type="text" th:field="*{address}" /><br/>
+
+        <label class="registration-text">Phone Number:</label>
+        <input type="text" th:field="*{number}" /><br/>
+
+        <label class="registration-text">Password:</label>
+        <input type="password" th:field="*{password}" /><br/>
+
+        <label class="registration-text">Age</label>
+        <input type="number" th:field="*{age}" /><br/>
+        <br/>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>

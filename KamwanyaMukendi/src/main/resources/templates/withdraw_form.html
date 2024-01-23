@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Registration</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        .registration-container {
+            border: 1px solid green;
+            border-radius: 10px;
+            padding: 10px;
+            width: 600px; /* Adjust the width according to your design */
+            margin: auto;
+            margin-top: 50px; /* Adjust the margin-top according to your design */
+        }
+
+        .registration-text {
+            display: block;
+            margin-bottom: 5px;
+            align: left;
+            margin: 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-right: 186px;
+        }
+        button-container button {
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            padding: 10px 70px;
+            margin-right: 100px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+         span.user-info {
+            font-weight: normal; /* Remove bold from the user info */
+        }
+        span {
+            display: inline-block;
+            width: 200px;
+            text-align: left;
+            margin: 0;
+            font-weight: bold; /* Make the info labels bold */
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            // Submit the withdrawal form via AJAX
+            $("form").submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (data) {
+                        // Display notification using JavaScript alert
+                        alert("Withdrawal Notice Successful!\n" +
+                            "Balance before withdrawal: " + data.previousBalance + "\n" +
+                            "Given withdrawal amount: " + data.withdrawalAmount + "\n" +
+                            "Closing Balance: " + data.currentBalance);
+                        // Redirect back to the products page
+                        window.location.href = '/view-products/' + data.email;
+                    },
+                    error: function () {
+                        alert("Error submitting withdrawal notice");
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div class="registration-container" >
+    <h2>Product Details</h2>
+    <span>ID:</span><span class="user-info"th:text="${product.id}"></span><br/>
+    <span>Type:</span><span class="user-info"  th:text="${product.type}"></span><br/>
+    <span>Name:</span><span class="user-info" th:text="${product.name}"></span><br/>
+    <span>Current Balance:</span><span class="user-info" th:text="${product.currentBalance}"></span><br/>
+    <br>
+    <form action="#" th:action="@{/withdraw/{productId}(productId=${product.id})}" method="post" th:object="${userRegistrationDto}">
+        <!-- Existing fields ... -->
+
+        <label class="registration-text">Enter Withdrawal Amount:</label>
+        <input type="text" th:field="*{amount}" /><br/>
+
+        <label class="registration-text">Enter Withdrawal Date(YYYY/MM/DD):</label>
+        <input type="text" th:field="*{date}" /><br/>
+
+        <h4>Enter Banking Details</h4>
+
+        <label class="registration-text">Bank Name</label>
+        <input type="text" th:field="*{bank}" /><br/>
+
+        <label class="registration-text">Branch Code:</label>
+        <input type="text" th:field="*{branchCode}" /><br/>
+
+        <label class="registration-text">Account Number:</label>
+        <input type="text" th:field="*{accNumber}" /><br/>
+
+        <br/>
+
+        <div class="button-container">
+            <button type="submit">Send Withdrawal Notice</button>
+            <a th:href="@{/view-products/{email}(email=${product.profile.email})}">
+                <button type="button">Cancel</button>
+            </a>
+        </div>
+
+
+
+        <br>
+        <br>
+        <p><strong>Note:</strong>if the form fails to submit the form check that all the details are correct.
+            If everything seems right ensure you are above 65 if this is a Retirement withdrawal notice
+            and that you withdrawal amount is not lager than 90% of you current product amount. </p>
+    </form>
+</div>
+</body>
+</html>
